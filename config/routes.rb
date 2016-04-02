@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     scope :v1 do
       resources :boards
       resources :users
+      resources :lists
     end
   end
 

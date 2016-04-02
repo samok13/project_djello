@@ -1,4 +1,4 @@
-<select ng-model="board" ng-options="board.title for board in boards | orderBy: '-created_at'" ng-change="changeState(board)">
+<select ng-model="selectedBoard" ng-options="board.title for board in boards | orderBy: '-created_at'" ng-change="changeState(selectedBoard)">
 </select>
 
 <a ui-sref='boards.new'>New Board</a>

@@ -1,6 +1,8 @@
 var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise'])
 
-
+//think about doing one api call per resource
+//look at the lists in boards convection
+//for doing cards in lists
 
 djello.config(['RestangularProvider', function(RestangularProvider) {
 
@@ -32,14 +34,16 @@ djello.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvid
         }]
       }
     })
-    .state("boards.show", {
-      url: "/:id",
-      templateUrl: "templates/show_board.html"
-    })
     .state("boards.new", {
       url: "/new",
       templateUrl: "templates/new_board.html"
     })
+    .state("boards.show", {
+      url: "/:id",
+      templateUrl: "templates/show_board.html",
+      controller: "BoardsCtrl"
+    })
+    
 
 
 

@@ -5,6 +5,10 @@ djello.factory('BoardsService', ['Restangular', 'Auth', function(Restangular, Au
     return Restangular.one('users', user.id).get();
   };
 
+  var getBoard = function(boardId){
+    return Restangular.one('boards', boardId).get();
+  };
+
 
   var createBoard = function(boardObj) {
     return Restangular.all('boards').post(boardObj);
@@ -23,7 +27,8 @@ djello.factory('BoardsService', ['Restangular', 'Auth', function(Restangular, Au
   return {
     getBoardsForUser: getBoardsForUser,
     createBoard: createBoard,
-    deleteBoard: deleteBoard
+    deleteBoard: deleteBoard,
+    getBoard: getBoard
     // updateBoard: updateBoard
   }
 

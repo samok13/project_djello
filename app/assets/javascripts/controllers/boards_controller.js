@@ -1,21 +1,28 @@
-djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUser', function($scope, $state, BoardsService, currentUser) {
+djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUser', '$stateParams', 'ListsService',function($scope, $state, BoardsService, currentUser, $stateParams, ListsService ) {
 
   $scope.formData = {};
   $scope.allLists = [];
 
-  // $scope.boardLists = [all lists for 58, all lists for 59]
-
   BoardsService.getBoardsForUser(currentUser).then(
     function(data) {
       $scope.boards = data.boards;
-
-      // for(var i=0; i < $scope.boards.length; i++){
-      //   $scope.lists.push($scope.boards[i].list)
-      // }
-      $scope.allLists = data.lists;
-      console.log($scope.allLists)
     });
 
+  //Only when user is on show page, get the current board, then get the lists for board
+  if($stateParams.id){
+    BoardsService.getBoard($stateParams.id)
+    .then(function(board){
+
+      $scope.currentBoard = board;
+    })
+    .then(function(){
+      return ListsService.getListsForBoard($scope.currentBoard)
+    })
+    .then(function(lists){
+      $scope.lists = lists;
+    });
+  }
+  
 
   $scope.changeState = function(board) {
     if(board){
