@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :boards
       resources :users
       resources :lists
+      resources :cards
     end
   end
 

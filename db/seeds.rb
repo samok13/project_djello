@@ -28,11 +28,6 @@ end
 
 User.create(email: 'a@admin.com', password: 'password', username: 'admin')
 
-
-
-
-
-
 p "creating boards..."
 
 def create_board(user_id)
@@ -46,13 +41,20 @@ User.all.each do |user|
   end
 end
 
-
-
 p "creating lists..."
 
 def create_list(board_id)
   List.create(title: Faker::Hipster.word, description: Faker::Hipster.sentence, board_id: board_id)
 end
+
+
+
+p "creating cards..."
+
+def create_card(list_id)
+  Card.create(title: Faker::Hipster.word, description:Faker::Hipster.sentence, list_id: list_id, completed: false)
+end
+
 
 Board.all.each do |board|
   3.times do
@@ -60,11 +62,10 @@ Board.all.each do |board|
   end
 end
 
-
-
-
-
-
-
+List.all.each do |list|
+  3.times do
+    create_card(list.id)
+  end
+end
 
 p "DONE"

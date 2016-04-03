@@ -1,4 +1,4 @@
-djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUser', '$stateParams', 'ListsService',function($scope, $state, BoardsService, currentUser, $stateParams, ListsService ) {
+djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUser', '$stateParams', 'ListsService', 'CardsService',function($scope, $state, BoardsService, currentUser, $stateParams, ListsService, CardsService ) {
 
   $scope.formData = {};
   $scope.allLists = [];
@@ -12,15 +12,16 @@ djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUs
   if($stateParams.id){
     BoardsService.getBoard($stateParams.id)
     .then(function(board){
-
       $scope.currentBoard = board;
-    })
-    .then(function(){
-      return ListsService.getListsForBoard($scope.currentBoard)
-    })
-    .then(function(lists){
-      $scope.lists = lists;
-    });
+      
+      ListsService.getListsForBoard($scope.currentBoard).then(function(lists){
+        $scope.lists = lists;
+
+        for(var i=0; i < $scope.lists.length; i++){
+          CardsService.getCardsForList($scope.lists[i]);
+        };
+      });
+    });  
   }
   
 
