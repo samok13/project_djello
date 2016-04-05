@@ -4,7 +4,7 @@ class CardsController < ApplicationController
     @cards = Card.where(list_id: params[:list_id])
 
     respond_to do |format|
-      format.json { render json: @cards.to_json }
+      format.json { render json: @cards.to_json(:include => :members) }
     end
   end
 

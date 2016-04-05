@@ -88,12 +88,14 @@ djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUs
     $scope.lists = _.reject($scope.lists, function(list){ return listToDelete.id === list.id});
   }
 
-  $scope.showCard = function(card){
+  $scope.showCard = function(card, list){
     ModalService.showModal({
       templateUrl: "templates/show_card.html",
       controller: "CardsCtrl"
     }).then(function(modal){
         modal.scope.card = card;
+        modal.scope.cardMembers = card.members;
+        modal.scope.list = list;
         modal.element.modal();
         modal.close.then(function(result) {
           $('.modal-backdrop').remove();
