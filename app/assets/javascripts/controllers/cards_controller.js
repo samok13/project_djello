@@ -1,4 +1,4 @@
-djello.controller('CardsCtrl', ['$scope','close','MembersService',function($scope, close, MembersService ) {
+djello.controller('CardsCtrl', ['$scope','close','MembersService', '$state', 'CardsService', function($scope, close, MembersService, $state, CardsService ) {
 
   //have access to $scope.card here
   //to do build out html of show card
@@ -14,13 +14,27 @@ djello.controller('CardsCtrl', ['$scope','close','MembersService',function($scop
 
   $scope.addMemberForm = false;
 
-  $scope.addMemberToCard = function(member){
-    console.log("cards contoller");
-    MembersService.addMemberToCard(member).then(function(response){
-      $scope.card.members.push(response);
-      $state.go("card.show")
+  //need access to currentcards
+
+  $scope.addMemberToCard = function(member, card){
+    MembersService.addMemberToCard(member, card).then(function(response){
+      console.log("promise complete");
+      card.members.push(response);
+      //$state.go("card.show")
     })
   }
+ 
+
+  $scope.createCardOnList = function(formIsValid, list){
+    if(formIsValid){
+      $scope.newCardData["list_id"] = list.id;
+      CardsService.createCardOnList($scope.newCardData).then(function(card){
+        $scope.list.cards.unshift(card);
+        $scope.cardFormData = {};
+        $scope.closeModal();
+      });
+    }
+  };
 
   $scope.closeModal = function(){
     close("Success!");

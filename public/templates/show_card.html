@@ -9,16 +9,20 @@
       <div class="modal-body">
         <p>{{card.description}}</p>
         <p>One fine body&hellip;</p>
-        <a> Edit the description </a>
+        <a ng-click="state.editCardDescription = !state.editCardDescription"> Edit the description </a>
+          <div ng-if="state.editCardDescription">
+            <textarea name="description" ng-model="cardFormData.description"></textarea>
+          <input type="submit" value="Save" ng-click="">
+          </div>
       </div>
       <div>
         <h4>Members</h4>
-        <div ng-repeat="member in cardMembers">
+        <div ng-repeat="member in card.members">
           <p>{{member.username}}</p>
         </div>
-        <button ng-click="state.addMemberForm = !state.addMemberForm">   Add Member</button>
+        <a ng-click="state.addMemberForm = !state.addMemberForm">   Add Member</a>
           <div ng-if="state.addMemberForm">
-          <select ng-model="memberToAdd" ng-options="member.username for member in allMembers" ng-change="addMemberToCard(memberToAdd)">
+          <select ng-model="memberToAdd" ng-options="member.username for member in allMembers" ng-change="addMemberToCard(memberToAdd, card)">
           </select>
           </div>
       </div>

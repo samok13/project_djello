@@ -12,10 +12,22 @@ class MembersController < ApplicationController
     end
   end
 
-# private
+  def create
+    @member = Membership.new(members_params)
 
-#   def members_params
-#     params.require(:members).permit(:card_id)
-#   end
+    respond_to do |format|
+      if @member.save
+        format.json { render json: @member.to_json }
+      else
+        format.json { render status: :unprocessable_entity }
+      end
+    end
+  end
+
+private
+
+  def members_params
+    params.require(:members).permit(:card_id, :user_id)
+  end
 
 end

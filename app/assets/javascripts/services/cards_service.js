@@ -6,9 +6,14 @@ djello.factory('CardsService', ['Restangular', function(Restangular) {
       })
     };
 
+  var createCardOnList = function(cardObj){
+    return Restangular.all('cards').post(cardObj);
+  };
+
 
 return{
-  getCardsForList: getCardsForList
+  getCardsForList: getCardsForList, 
+  createCardOnList: createCardOnList
 }
 
 }]);

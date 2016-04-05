@@ -104,6 +104,20 @@ djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUs
     });
   }
 
+  $scope.createCard = function(list){
+    ModalService.showModal({
+      templateUrl: "templates/new_card.html",
+      controller: "CardsCtrl"
+    }).then(function(modal){
+        modal.scope.list = list;
+        modal.element.modal();
+        modal.close.then(function(result) {
+          $('.modal-backdrop').remove();
+          console.log(result);
+      });
+    });
+  }
+
 
 
 }]);

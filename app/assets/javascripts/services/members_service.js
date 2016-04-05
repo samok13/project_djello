@@ -4,10 +4,9 @@ djello.factory('MembersService', ['Restangular', function(Restangular) {
     return Restangular.all('members').getList();
   };
 
-  var addMemberToCard = function(memberObj){
+  var addMemberToCard = function(member, card){
     console.log("member to card");
-    return Restangular.all('members').post(memberObj);
-    console.log(members);
+    return Restangular.all('members').post({members: {user_id: member.id, card_id: card.id}});
   };
 
 return{

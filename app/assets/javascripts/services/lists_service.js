@@ -1,7 +1,12 @@
 djello.factory('ListsService', ['Restangular', function(Restangular) {
 
+  var listsOnBoard = [];
+
   var getListsForBoard = function(board) {
-      return Restangular.all('lists').getList({board_id: board.id});
+    if(listsOnBoard.length){
+      return listsOnBoard;
+    }
+    return listsOnBoard = Restangular.all('lists').getList({board_id: board.id})
     };
 
 

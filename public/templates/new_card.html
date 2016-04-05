@@ -1,0 +1,30 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="closeModal()" data-dismiss="modal">&times;</span></button>
+        <h4 class="modal-title">Create a Card</h4>
+      </div>
+
+      <div class="modal-body">
+      <form name="newCard">
+      <label>Card Title</label>
+      <input type="text" name="title" ng-model="newCardData.title" placeholder="Add Card Title..." >
+      <br>
+      <br>
+      <label>Card Description</label>
+      <textarea name="description" ng-model="newCardData.description" placeholder="Add Card Description..."></textarea>
+      <br>
+      <br>
+      <label>Card Member(s)</label>
+      <select ng-options="member.username for member in allMembers" ng-model="newCardData.members">
+        </select>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="closeModal()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="createCardOnList(newCard.$valid, list)">Create Card</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
