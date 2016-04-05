@@ -1,0 +1,8 @@
+<h3>New list stuff</h3>
+
+  <form name="newList">
+    <input type="text" name="title" ng-model="listFormData.title" placeholder="Add Board Title..." >
+    <br>
+    <textarea rows="4" cols="50" name="description" ng-model="listFormData.description" placeholder="Add List Description..."></textarea>
+    <input type="submit" value="Save" ng-click="createListOnBoard(newList.$valid)">
+  </form>

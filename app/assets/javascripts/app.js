@@ -1,4 +1,6 @@
-var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise'])
+
+
+var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise', 'angularModalService'])
 
 //think about doing one api call per resource
 //look at the lists in boards convection
@@ -30,6 +32,7 @@ djello.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvid
       controller: "BoardsCtrl",
       resolve: {
         currentUser: ['Auth', function(Auth) {
+          console.log('auth');
           return Auth.currentUser();
         }]
       }
@@ -42,6 +45,11 @@ djello.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvid
       url: "/:id",
       templateUrl: "templates/show_board.html",
       controller: "BoardsCtrl"
+    })
+    .state("boards.show.list.edit", {
+      url:"/lists/:list_id/edit",
+      templateUrl: "templates/edit_list.html",
+      controller: "ListsCrtl"
     })
     
 

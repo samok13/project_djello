@@ -1,15 +1,50 @@
-<h1>Hi this is show_board</h1>
+<h1>{{currentBoard.title}}</h1>
+<p>Board Id = {{ currentBoard.id }}</p>
 
 <a ng-click="deleteBoard(board)">Delete Board</a>
-<br>
-{{ currentBoard.id }}
-<br>
 
+<br>
+<h2>Lists</h2>
+<button ng-click="state.newBoardForm = !state.newBoardForm" >New List</button>
+
+<div ng-if="state.newBoardForm">
+  <h3>New List</h3>
+
+  <form name="newList">
+    <input type="text" name="title" ng-model="listFormData.title" placeholder="Add Board Title..." >
+    <br>
+    <textarea rows="4" cols="50" name="description" ng-model="listFormData.description" placeholder="Add List Description..."></textarea>
+    <input type="submit" value="Save" ng-click="createListOnBoard(newList.$valid, state)">
+  </form>
+</div>
+
+
+
+<br>
 <div ng-repeat="list in lists">
-  <p><strong>{{ list.title }}</strong></p>
+<br>
+  <a ng-click="state.showListEdit = ! state.showListEdit"><p><strong>
+      <ui-view>List Title: {{ list.title }}<ui-view></strong></p></a>
+      <a ng-click="deleteList(list)">Delete List</a>
+  <p>List Description: {{list.description}}</p>
+
+  <div ng-if="state.showListEdit">
+    <h3>Edit List</h3>
+
+    <form name="editList">
+      <input type="text" name="title" ng-model="list.title" placeholder="Add Board Title..." >
+      <br>
+      <textarea rows="4" cols="50" name="description" ng-model="list.description" placeholder="Add List Description..."></textarea>
+      <input type="submit" value="Save" ng-click="updateAndHideList(editList.$valid, list, state.showListEdit)">
+    </form>
+  </div>
+
+<!-- js doesn't pass primitives well. May have to use an obj. Pass by reference EXCEPT on primitives where it passes by value.
+http://stackoverflow.com/questions/14049480/what-are-the-nuances-of-scope-prototypal-prototypical-inheritance-in-angularjs/14049482#14049482 -->
+
   <div ng-repeat="card in list.cards">
-    <p>{{ card.title }}</p>
-    <p>{{ card.description }}</p>
+    <a href="" ng-click="showCard(card)"><p>Card Title: {{ card.title }}</p></a>
+    <p>Card Description: {{ card.description }}</p>
     <br>
   </div>
 </div>

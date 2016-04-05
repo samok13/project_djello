@@ -4,11 +4,20 @@ djello.factory('ListsService', ['Restangular', function(Restangular) {
       return Restangular.all('lists').getList({board_id: board.id});
     };
 
-    //firstAccount.getList("users", {query: params}).then(function(users) {
+
+  var createListOnBoard = function(listObj){
+    return Restangular.all('lists').post(listObj);
+  };
+
+  var updateList = function(list){
+    return Restangular.one('lists', list.id).patch();
+  }
 
 
 return{
-  getListsForBoard: getListsForBoard
+  getListsForBoard: getListsForBoard,
+  createListOnBoard: createListOnBoard,
+  updateList: updateList
 }
 
 }]);

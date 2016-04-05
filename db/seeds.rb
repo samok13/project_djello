@@ -11,6 +11,7 @@ p "deleting everything....."
 User.destroy_all
 Board.destroy_all
 List.destroy_all
+Card.destroy_all
 
 
 p 'creating users.....'
@@ -22,11 +23,13 @@ def create_user
     password: 'password')
 end
 
+User.create(email: 'a@admin.com', password: 'password', username: 'admin')
+
 10.times do 
   create_user
 end
 
-User.create(email: 'a@admin.com', password: 'password', username: 'admin')
+
 
 p "creating boards..."
 
@@ -52,7 +55,9 @@ end
 p "creating cards..."
 
 def create_card(list_id)
-  Card.create(title: Faker::Hipster.word, description:Faker::Hipster.sentence, list_id: list_id, completed: false)
+  card = Card.create(title: Faker::Hipster.word, description:Faker::Hipster.sentence, list_id: list_id, completed: false, owner: User.first)
+  card.members = User.all.sample(2)
+
 end
 
 
@@ -67,5 +72,7 @@ List.all.each do |list|
     create_card(list.id)
   end
 end
+
+
 
 p "DONE"

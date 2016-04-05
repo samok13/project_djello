@@ -2,6 +2,7 @@ djello.factory('BoardsService', ['Restangular', 'Auth', function(Restangular, Au
 
 
   var getBoardsForUser = function(user) {
+    console.log('boards for user');
     return Restangular.one('users', user.id).get();
   };
 
