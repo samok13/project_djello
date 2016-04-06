@@ -29,7 +29,7 @@ djello.controller('CardsCtrl', ['$scope','close','MembersService', '$state', 'Ca
     if(formIsValid){
       $scope.newCardData["list_id"] = list.id;
       CardsService.createCardOnList($scope.newCardData).then(function(card){
-        $scope.list.cards.unshift(card);
+        list.cards.unshift(card);
         $scope.cardFormData = {};
         $scope.closeModal();
       });

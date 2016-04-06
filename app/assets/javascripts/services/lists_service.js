@@ -11,7 +11,11 @@ djello.factory('ListsService', ['Restangular', function(Restangular) {
 
 
   var createListOnBoard = function(listObj){
-    return Restangular.all('lists').post(listObj);
+    return Restangular.all('lists').post(listObj)
+    .then(function(list) {
+      list.cards = [];
+      return list;
+    });
   };
 
   var updateList = function(list){

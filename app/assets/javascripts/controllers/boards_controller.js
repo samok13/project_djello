@@ -4,7 +4,7 @@ djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUs
   $scope.formData = {};
   $scope.listFormData = {};
   $scope.allLists = [];
-  $scope.newBoardForm = false;
+  $scope.newListForm = false;
 
 
   BoardsService.getBoardsForUser(currentUser).then(
@@ -58,7 +58,7 @@ djello.controller('BoardsCtrl', ['$scope', '$state', 'BoardsService', 'currentUs
         $state.go("boards.show", {id: $scope.currentBoard.id})
          $scope.listFormData = {};
       });
-      state.newBoardForm = false;
+      state.newListForm = false;
     }
   }
 

@@ -5,13 +5,12 @@
 
 <br>
 <h2>Lists</h2>
-<button ng-click="state.newBoardForm = !state.newBoardForm" >New List</button>
+<button ng-click="state.newListForm = !state.newListForm" >New List</button>
 
-<div ng-if="state.newBoardForm">
+<div ng-if="state.newListForm">
   <h3>New List</h3>
-
   <form name="newList">
-    <input type="text" name="title" ng-model="listFormData.title" placeholder="Add Board Title..." >
+    <input type="text" name="title" ng-model="listFormData.title" placeholder="Add List Title..." >
     <br>
     <textarea rows="4" cols="50" name="description" ng-model="listFormData.description" placeholder="Add List Description..."></textarea>
     <input type="submit" value="Save" ng-click="createListOnBoard(newList.$valid, state)">
